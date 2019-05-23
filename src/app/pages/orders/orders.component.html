@@ -1,0 +1,40 @@
+<div class="container-fluid orders-page">
+  <div class="row">
+    <div class="col-12 search-filter">
+      <input class="form-control" placeholder="Search Customer Username" [(ngModel)]="params.customerName" (change)="onParamChange()">
+    </div>
+    <div class="col-12">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Order Date</th>
+            <th>Created Date</th>
+            <th>Customer Username</th>
+            <th>Customer Email</th>
+            <th>Order Total</th>
+            <th>Amount Paid</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td>{{ order.orderId }}</td>
+            <td>{{ order.orderDate | date: 'MM/DD/YYYY' }}</td>
+            <td>{{ order.createDate | date: 'MM/DD/YYYY' }}</td>
+            <td>{{ order.customerUsername }}</td>
+            <td>{{ order.customerEmail }}</td>
+            <td>{{ order.orderTotal | number: '1.0-2' }}</td>
+            <td>{{ order.amountPaid | number: '1.0-2' }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td [attr.colspan]="7">
+              <app-paginator [total]="totalOrders" [countPerPage]="countPerPage" [(page)]="params.page" (pageChange)="onParamChange()"></app-paginator>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
